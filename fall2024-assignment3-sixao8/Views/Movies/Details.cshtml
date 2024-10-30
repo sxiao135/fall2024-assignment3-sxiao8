@@ -1,0 +1,56 @@
+﻿@model fall2024_assignment3_sixao8.Models.Movie
+
+@{
+    ViewData["Title"] = "Details";
+    var generatedHtml = ViewBag.GeneratedHtml as string;
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Movie</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IMDB)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IMDB)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Genre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Genre)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.releaseYear)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.releaseYear)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Media)
+        </dt>
+        <dd class = "col-sm-10">
+            @if (Model.Media != null)
+            {
+                var base64 = Convert.ToBase64String(Model.Media);
+                var imgSrc = string.Format("data:image/jpg;base64,{0}", base64);
+                <img src="@Url.Action("GetMoviePoster", "Movie", new { Model.Media })" width="100" height="100" />
+            }
+        </dd>
+    </dl>
+    <div id="reviews"> @Html.Raw(generatedHtml)</div>
+
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

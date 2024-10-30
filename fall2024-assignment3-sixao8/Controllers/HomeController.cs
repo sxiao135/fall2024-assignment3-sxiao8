@@ -23,6 +23,11 @@ namespace fall2024_assignment3_sixao8.Controllers
             return View();
         }
 
+        public IActionResult Actors()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

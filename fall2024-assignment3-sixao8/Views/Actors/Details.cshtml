@@ -1,0 +1,57 @@
+﻿@model fall2024_assignment3_sixao8.Models.Actor
+
+@{
+    ViewData["Title"] = "Details";
+    var generatedHtml = ViewBag.GeneratedHtml as string;
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Actor</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IMDBlink)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IMDBlink)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ProfilePic)
+        </dt>
+        <dd class = "col-sm-10">
+            @if (Model.ProfilePic != null)
+            {
+                var base64 = Convert.ToBase64String(Model.ProfilePic);
+                var imgSrc = string.Format("data:image/png;base64,{0}", base64);
+                <img src="@Url.Action("GetActorPfp", "Actor", new { Model.ProfilePic })" width="100" height="100" />
+               
+            }
+        </dd>
+    </dl>
+    <div id="tweets"> @Html.Raw(generatedHtml)</div>
+    <div id="tweetSentiment"> Tweet Sentiment: @Html.DisplayFor(model => model.TweetSentiment)</div>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
