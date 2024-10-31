@@ -46,14 +46,6 @@
                 @Html.DisplayFor(modelItem => item.releaseYear)
             </td>
             <td>
-                @if (item.Media != null)
-                {
-                    var base64 = Convert.ToBase64String(item.Media);
-                    var imgSrc = string.Format("data:image/jpg;base64,{0}", base64);
-                    <img src="@Url.Action("GetMoviePoster", "Movie", new { item.Media })" width="100" height="100" />
-                }
-            </td>
-            <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>

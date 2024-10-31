@@ -35,7 +35,7 @@ namespace fall2024_assignment3_sixao8.Controllers
             }
 
             var actor = await _context.Actor.FindAsync(id);
-            if (actor == null || actor.ProfilePic == null)
+            if (actor == null && actor.ProfilePic == null)
             {
                 return NotFound();
             }
@@ -64,6 +64,12 @@ namespace fall2024_assignment3_sixao8.Controllers
                 return NotFound();
             }
 
+            var movies = await _context.ActorMovie
+            .Include(ma => ma.Movie)
+            .Where(ma => ma.ActorId == actor.Id)
+            .Select(ma => ma.Movie)
+            .ToListAsync();
+
             //tweet stuff
             var model = actor.Tweets;
             var HtmlBuilder = new StringBuilder();
@@ -74,7 +80,9 @@ namespace fall2024_assignment3_sixao8.Controllers
             }
             ViewBag.GeneratedHtml = HtmlBuilder.ToString();
 
-            return View(actor);
+            var vm = new ActorDetail(actor, movies);
+
+            return View(vm);
         }
 
         public async Task GenerateTweets(Actor actor)
@@ -132,7 +140,7 @@ namespace fall2024_assignment3_sixao8.Controllers
                 if (ProfilePic != null && ProfilePic.Length > 0)
                 {
                     using var memoryStream = new MemoryStream(); // Dispose() for garbage collection 
-                    ProfilePic.CopyToAsync(memoryStream);
+                    ProfilePic.CopyTo(memoryStream);
                     actor.ProfilePic = memoryStream.ToArray();
                 }
 
@@ -181,7 +189,7 @@ namespace fall2024_assignment3_sixao8.Controllers
                     if (ProfilePic != null && ProfilePic.Length > 0)
                     {
                         using var memoryStream = new MemoryStream(); // Dispose() for garbage collection 
-                        ProfilePic.CopyToAsync(memoryStream);
+                        ProfilePic.CopyTo(memoryStream);
                         actor.ProfilePic = memoryStream.ToArray();
                     }
 

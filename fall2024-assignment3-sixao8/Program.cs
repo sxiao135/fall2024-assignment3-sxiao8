@@ -7,8 +7,8 @@ using fall2024_assignment3_sixao8.Extensions;
 using static fall2024_assignment3_sixao8.Const;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<fall2024_assignment3_sixao8Context>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("fall2024_assignment3_sixao8Context") ?? throw new InvalidOperationException("Connection string 'fall2024_assignment3_sixao8Context' not found.")));
+//builder.Services.AddDbContext<fall2024_assignment3_sixao8Context>(options =>
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("fall2024_assignment3_sixao8Context") ?? throw new InvalidOperationException("Connection string 'fall2024_assignment3_sixao8Context' not found.")));
 
 //var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 //builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -24,17 +24,20 @@ builder.Services.AddDbContext<fall2024_assignment3_sixao8Context>(options =>
 //string connectionString = conStrBuilder.ConnectionString;
 
 string configConnectionString = builder.Configuration.GetConnectionStringOrError(Config.ConnectionStrings.DefaultConnection);
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(configConnectionString));
 var conStrBuilder = new SqlConnectionStringBuilder(configConnectionString);
 conStrBuilder.UserID = builder.Configuration.GetOrError("DbUsername");
 conStrBuilder.Password = builder.Configuration.GetOrError("DbPassword");
 string connectionString = conStrBuilder.ConnectionString;
 
+builder.Services.AddDbContext<fall2024_assignment3_sixao8Context>(options =>
+    options.UseSqlServer(connectionString));
+
+
+
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+    .AddEntityFrameworkStores<fall2024_assignment3_sixao8Context>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

@@ -12,8 +12,8 @@ using fall2024_assignment3_sixao8.Data;
 namespace fall2024_assignment3_sixao8.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241030043628_updateType")]
-    partial class updateType
+    [Migration("20241030170421_testing")]
+    partial class testing
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

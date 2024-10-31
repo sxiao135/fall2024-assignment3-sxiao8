@@ -36,7 +36,7 @@ namespace fall2024_assignment3_sixao8.Controllers
             }
 
             var movie = await _context.Movie.FindAsync(id);
-            if (movie == null || movie.Media == null)
+            if (movie == null && movie.Media == null)
             {
                 return NotFound();
             }
@@ -135,7 +135,7 @@ namespace fall2024_assignment3_sixao8.Controllers
                 if (Media != null && Media.Length > 0)
                 {
                     using var memoryStream = new MemoryStream(); // Dispose() for garbage collection 
-                    Media.CopyToAsync(memoryStream);
+                    Media.CopyTo(memoryStream);
                     movie.Media = memoryStream.ToArray();
                 }
 
@@ -167,7 +167,7 @@ namespace fall2024_assignment3_sixao8.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,IMDB,Genre,releaseYear,Media")] Movie movie)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,IMDB,Genre,releaseYear,Media")] Movie movie, IFormFile? Media)
         {
             if (id != movie.Id)
             {
@@ -179,6 +179,14 @@ namespace fall2024_assignment3_sixao8.Controllers
                 try
                 {
                     await GenerateReviews(movie);
+
+                    if (Media != null && Media.Length > 0)
+                    {
+                        using var memoryStream = new MemoryStream(); // Dispose() for garbage collection 
+                        Media.CopyTo(memoryStream);
+                        movie.Media = memoryStream.ToArray();
+                    }
+
                     _context.Update(movie);
                     await _context.SaveChangesAsync();
                 }
