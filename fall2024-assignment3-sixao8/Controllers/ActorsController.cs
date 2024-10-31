@@ -75,8 +75,10 @@ namespace fall2024_assignment3_sixao8.Controllers
             var HtmlBuilder = new StringBuilder();
             foreach (string tweet in model)
             {
-                HtmlBuilder.AppendLine($"<h2 id='tweetTitle'>{actor.Name}</h2>");
+                HtmlBuilder.AppendLine($"<div class='tweets'>");
+                HtmlBuilder.AppendLine($"<h5 id='tweetTitle'>@{actor.Name}TheMinion</h5>");
                 HtmlBuilder.AppendLine($"<p id='tweetText'>{tweet}</p>");
+                HtmlBuilder.AppendLine($"</div>");
             }
             ViewBag.GeneratedHtml = HtmlBuilder.ToString();
 

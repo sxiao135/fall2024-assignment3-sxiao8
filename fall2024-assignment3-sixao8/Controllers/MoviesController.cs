@@ -88,11 +88,11 @@ namespace fall2024_assignment3_sixao8.Controllers
 
             ChatClient client = new AzureOpenAIClient(new Uri(ApiEndpoint), ApiCredential).GetChatClient(ApiDeployment);
 
-            string[] personas = { "is harsh", "loves romance", "loves comedy", "loves thrillers", "loves fantasy", "unattentive", "hates kevin" };
+            string[] personas = { "is harsh", "loves romance", "loves comedy", "loves thrillers", "loves fantasy", "unattentive", "hates kevin", "first time watcher", "loves horror", "doesn't like thrillers" };
             var messages = new ChatMessage[]
             {
-            new SystemChatMessage($"You represent a group of 6-12 minions who have the following personalities: {string.Join(",", personas)}. When you receive a question, respond as each member of the group with each response separated by a '|'. respond entirely in minionese, no english."),
-            new UserChatMessage($"How would you rate your experience as a minion in the movie {movie.Title} out of 10 in 10- 150 words?")
+            new SystemChatMessage($"You represent a group of minions who have the following personalities: {string.Join(",", personas)}. respond anonymously as 6-10 different members of the group. respond entirely in minionese, no english."),
+            new UserChatMessage($"How would you rate your experience as a minion in the movie {movie.Title} out of 10 in 10-150 words? Each response should be separated by a '|'. do not include anything else besides the response and their rating.")
             };
             ClientResult<ChatCompletion> result = await client.CompleteChatAsync(messages);
             string[] reviews = result.Value.Content[0].Text.Split('|').Select(s => s.Trim()).ToArray();

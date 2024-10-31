@@ -10,15 +10,16 @@ html {
   }
 }
 
+.container {
+    margin: 30px;
+}
+
 .navbar {
     display: flex;
-    position: sticky;
-    align-items: center;
-    justify-content: space-between;
+    align-items: flex-start;
     top: 0px;
     background-size: cover;
     color: white;
-    padding: 10px 20px;
 }
 
 .nav-list {
@@ -26,8 +27,9 @@ html {
     list-style: none;
     flex-direction: row;
     width: 100%;
-    align-items: flex-end;
-    justify-content: space-between;
+}
+.nav-item {
+    margin-right: 30px;
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
@@ -43,5 +45,66 @@ body {
     margin-bottom: 60px;
     background-color: orange;
     font-family: "Bebas Neue", sans-serif;
+}
+
+.movie-list{
+    display: flex;
+    flex-direction: row;
+}
+
+.movie-element {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+}
+
+.detail-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.detail-info-element {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.detail-info-element, h4, p {
+    padding-right: 5px;
+}
+
+.detail-info-photo{
+    border: 1px solid;
+    border-color: white;
+    border-radius: 5px;
+}
+
+.tweets {
+    background-color: white;
+    border-radius: 10px;
+    padding: 5px 40px;
+    margin: 10px 0px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.index-layout {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.index-item{
+    border: 1px solid;
+    border-color: white;
+    border-radius: 10px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    background-color: rgb(255, 255, 255, .5);
 }
 

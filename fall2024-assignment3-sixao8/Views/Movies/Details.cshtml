@@ -5,50 +5,33 @@
     var generatedHtml = ViewBag.GeneratedHtml as string;
 }
 
-<h1>Details</h1>
-
 <div>
-    <h4>Movie</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IMDB)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IMDB)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Genre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Genre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.releaseYear)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.releaseYear)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Media)
-        </dt>
-        <dd class = "col-sm-10">
+    <div class="detail-info">
+        <div class="movie-info-text">
+            <h1>@Html.DisplayFor(model => model.Title)</h1>
+            <div class="detail-info-element">
+                <h4>Genre: </h4>
+                <p>@Html.DisplayFor(model => model.Genre)</p>
+            </div>
+            <div class="detail-info-element">
+                <h4>Released: </h4>
+                <p>@Html.DisplayFor(model => model.releaseYear)</p>
+            </div>
+            <h4><a href=" @Html.DisplayFor(model => model.IMDB)">IMBD Profile</a></h4>
+        </div>
+        <div class="detail-info-photo">
             @if (Model.Media != null)
             {
                 var base64 = Convert.ToBase64String(Model.Media);
                 var imgSrc = string.Format("data:image/png;base64,{0}", base64);
-                <img src="@Url.Action("GetMoviePoster", "Movies", new { Model.Id })" width="100" height="100" />
+                <img src="@Url.Action("GetMoviePoster", "Movies", new { Model.Id })" width="200" />
             }
-        </dd>
-    </dl>
+        </div>
+    </div>
+    <h3>Reviews</h3>
+    <hr />
     <div id="reviews"> @Html.Raw(generatedHtml)</div>
-
+    <p>@Html.DisplayFor(model => model.reviewSentiment)</p>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
