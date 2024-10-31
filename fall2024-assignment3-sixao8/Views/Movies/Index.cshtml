@@ -23,8 +23,11 @@
                         <img src="@Url.Action("GetMoviePoster", "Movies", new { item.Id })" width="200" />
                     }
                 </div>
-                <p href="@Html.DisplayFor(modelItem => item.IMDB)">
-                    IMDB
+                <p >
+                    <a href="@Html.DisplayFor(modelItem => item.IMDB)">
+                        IMDB
+                    </a>
+                    
                 </p>
                 <p>
                     @Html.DisplayFor(modelItem => item.Genre)

@@ -10,6 +10,19 @@ html {
   }
 }
 
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #000000;
+    margin: 1em 0;
+    padding: 0;
+}
+
+a:link, a:visited, a:hover, a:active {
+    color: #2656b2;
+}
+
 .container {
     margin: 30px;
 }
@@ -32,13 +45,32 @@ html {
     margin-right: 30px;
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+a.nav-text{
+    text-decoration: none;
+    color: black;
+}
+
+.frontpage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:center;
+}
+.gruniverse {
+    background: linear-gradient(#000000, #ff0000);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: #000000;
+    font-size: 300px;
+    padding: 0px;
+    margin: 0px;
+    text-decoration: solid black;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
@@ -77,9 +109,7 @@ body {
 }
 
 .detail-info-photo{
-    border: 1px solid;
-    border-color: white;
-    border-radius: 5px;
+    
 }
 
 .tweets {
